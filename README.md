@@ -1,37 +1,29 @@
-# Sample App Title
+# Multi-Factor Auth CLI
 
-<a href="http://dev.bandwidth.com">
-  <img src="https://s3.amazonaws.com/bwdemos/BW-VMP.png" title="Product Quick Start Guide" alt="Product Quick Start Guide"/> <!--src should be image located in repo-->
+<a href="https://dev.bandwidth.com/docs/mfa/">
+  <img src="./icon-mfa.svg" title="Multi-Factor Auth About Page" alt="Multi-Factor Auth About Page"/>
 </a>
 
  # Table of Contents
 
-* [Description](#description)
-* [Pre-Requisites](#pre-requisites)
-* [Running the Application](#running-the-application)
-* [Environmental Variables](#environmental-variables)
-* [Callback URLs](#callback-urls)
-  * [Ngrok](#ngrok)
+- [Multi-Factor Auth CLI](#multi-factor-auth-cli)
+- [Table of Contents](#table-of-contents)
+- [Description](#description)
+- [Pre-Requisites](#pre-requisites)
+- [Environmental Variables](#environmental-variables)
+- [Running the Application](#running-the-application)
 
 # Description
 
-A short description of your sample app and its capabilities.
+This app creates a simple CLI tool used to create and verify multi-factor auth codes using Bandwidth's Multi-Factor Auth API. The app will prompt the user for their phone number, followed by their preferred method of code delivery; either messaging or voice. The app will then text or call the phone number provided with a 6 digit MFA code that the user can enter back into the CLI to verify.
 
 # Pre-Requisites
 
 In order to use the Bandwidth API users need to set up the appropriate application at the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and create API tokens.
 
-To create an application log into the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and navigate to the `Applications` tab.  Fill out the **New Application** form selecting the service (Messaging or Voice) that the application will be used for.  All Bandwidth services require publicly accessible Callback URLs, for more information on how to set one up see [Callback URLs](#callback-urls).
+To create an application log into the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and navigate to the `Applications` tab.  Fill out the **New Application** form selecting the service that the application will be used for (this sample app uses a messaging application).
 
 For more information about API credentials see our [Account Credentials](https://dev.bandwidth.com/docs/account/credentials) page.
-
-# Running the Application
-
-Use the following command/s to run the application:
-
-```sh
-# start command here
-```
 
 # Environmental Variables
 
@@ -42,28 +34,14 @@ BW_ACCOUNT_ID                        # Your Bandwidth Account Id
 BW_USERNAME                          # Your Bandwidth API Username
 BW_PASSWORD                          # Your Bandwidth API Password
 BW_NUMBER                            # The Bandwidth phone number involved with this application
-USER_NUMBER                          # The user's phone number involved with this application
 BW_VOICE_APPLICATION_ID              # Your Voice Application Id created in the dashboard
 BW_MESSAGING_APPLICATION_ID          # Your Messaging Application Id created in the dashboard
-BASE_CALLBACK_URL                    # Your public base url to receive Bandwidth Webhooks. No trailing '/'
-LOCAL_PORT                           # The port number you wish to run the sample on
 ```
 
-# Callback URLs
+# Running the Application
 
-For a detailed introduction, check out our [Bandwidth Product Specific Callbacks](https://dev.bandwidth.com/docs/messaging/webhooks) page.
-
-Below are the callback paths:
-* **Should follow `/callbacks/{direction}/{service}` conventions**
-* `<add other callbacks>`
-
-## Ngrok
-
-A simple way to set up a local callback URL for testing is to use the free tool [ngrok](https://ngrok.com/).  
-After you have downloaded and installed `ngrok` run the following command to open a public tunnel to your port (`$LOCAL_PORT`)
+Use the following command to run the application:
 
 ```sh
-ngrok http $LOCAL_PORT
+dotnet run
 ```
-
-You can view your public URL at `http://127.0.0.1:{LOCAL_PORT}` after ngrok is running.  You can also view the status of the tunnel and requests/responses here.

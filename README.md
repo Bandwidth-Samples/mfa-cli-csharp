@@ -4,39 +4,26 @@
   <img src="./icon-mfa.svg" title="Multi-Factor Auth About Page" alt="Multi-Factor Auth About Page"/>
 </a>
 
- # Table of Contents
+# Table of Contents
 
-- [Multi-Factor Auth CLI](#multi-factor-auth-cli)
-- [Table of Contents](#table-of-contents)
-- [Description](#description)
-- [Pre-Requisites](#pre-requisites)
-- [Environmental Variables](#environmental-variables)
-- [Running the Application](#running-the-application)
+* [Description](#description)
+* [Pre-Requisites](#pre-requisites)
+* [Running the Application](#running-the-application)
+* [Environmental Variables](#environmental-variables)
 
 # Description
 
-This app creates a simple CLI tool used to create and verify multi-factor auth codes using Bandwidth's Multi-Factor Auth API. The app will prompt the user for their phone number, followed by their preferred method of code delivery; either messaging or voice. The app will then text or call the phone number provided with a 6 digit MFA code that the user can enter back into the CLI to verify.
+This sample app is a command line tool that sends and verifies multi-factor auth codes using Bandwidth's Multi-Factor Auth API.
+
+The app asks for a phone number in E.164 format and whether to send the code by `messaging` or `voice` (`messaging` if left blank). It then texts or calls that number with a 6 digit code, asks you to enter the code, and checks it. The app exits with status `0` if the code is verified and `1` otherwise.
 
 # Pre-Requisites
 
-In order to use the Bandwidth API users need to set up the appropriate application at the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and create API tokens.
+In order to use the Bandwidth API users need to set up the appropriate applications at the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and create API tokens.
 
-To create an application log into the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and navigate to the `Applications` tab.  Fill out the **New Application** form selecting the service that the application will be used for (this sample app uses a messaging application).
+This app needs two applications, one for each delivery method. To create an application log into the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and navigate to the `Applications` tab. Fill out the **New Application** form once selecting Messaging, and once selecting Voice. This app doesn't receive any callbacks, so the callback URLs can be left as placeholders.
 
 For more information about API credentials see our [Account Credentials](https://dev.bandwidth.com/docs/account/credentials) page.
-
-# Environmental Variables
-
-The sample app uses the below environmental variables.
-
-```sh
-BW_ACCOUNT_ID                        # Your Bandwidth Account Id
-BW_USERNAME                          # Your Bandwidth API Username
-BW_PASSWORD                          # Your Bandwidth API Password
-BW_NUMBER                            # The Bandwidth phone number involved with this application
-BW_VOICE_APPLICATION_ID              # Your Voice Application Id created in the dashboard
-BW_MESSAGING_APPLICATION_ID          # Your Messaging Application Id created in the dashboard
-```
 
 # Running the Application
 
@@ -44,4 +31,17 @@ Use the following command to run the application:
 
 ```sh
 dotnet run
+```
+
+# Environmental Variables
+
+The sample app uses the below environmental variables.
+
+```sh
+BW_ACCOUNT_ID                        # Your Bandwidth Account Id
+BW_CLIENT_ID                         # Your Bandwidth API OAuth Client Id
+BW_CLIENT_SECRET                     # Your Bandwidth API OAuth Client Secret
+BW_NUMBER                            # The Bandwidth phone number the code is sent from
+BW_VOICE_APPLICATION_ID              # Your Voice Application Id created in the dashboard
+BW_MESSAGING_APPLICATION_ID          # Your Messaging Application Id created in the dashboard
 ```
